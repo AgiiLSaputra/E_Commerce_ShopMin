@@ -1,0 +1,17 @@
+{
+  "name": "shopmin",
+  "version": "1.0.0",
+  "description": "ShopMin E-Commerce - Full Stack",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd ShopMin && npm run dev",
+    "install:all": "cd backend && npm install && cd ../ShopMin && npm install",
+    "migrate": "cd backend && npm run migrate",
+    "seed": "cd backend && npm run seed",
+    "setup": "npm run install:all && npm run migrate && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
