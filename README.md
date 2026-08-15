@@ -1,131 +1,176 @@
-# ShopMin
+# ShopMin - E-Commerce
 
-E-commerce full-stack portfolio project — React frontend + Express.js backend + MySQL database.
+Toko online modern dengan tampilan minimalis, dibangun dengan React + Express + SQLite.
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS, Motion |
-| Backend | Node.js, Express.js |
-| Database | MySQL (XAMPP) |
-| Auth | JWT + bcrypt |
+**Frontend**
+- React 19 + TypeScript
+- Tailwind CSS
+- Framer Motion (animasi)
+- Lucide React (ikon)
+
+**Backend**
+- Express 5
+- SQLite (better-sqlite3)
+- JWT (jsonwebtoken)
+- bcryptjs (hashing password)
 
 ## Fitur
 
-- Katalog produk (search, filter kategori, sort harga)
-- Detail produk (gambar, varian warna/ukuran, quantity)
-- Shopping cart (tambah/hapus/update qty)
-- Checkout & pembayaran dummy (COD, GoPay, OVO, Bank Transfer)
-- Guest checkout (tidak perlu login)
-- Autentikasi (login/register)
-- Riwayat pesanan + hapus riwayat
-- Wishlist produk
-- Kode promo/voucher
-- Rating & review produk
-- Animasi transisi di semua halaman
-- Responsive mobile-first
+- **Katalog Produk** — pencarian, filter kategori, sorting
+- **Detail Produk** — galeri gambar, pilihan warna/ukuran, spesifikasi, ulasan
+- **Keranjang Belanja** — tambah/hapus item, ubah jumlah, kode promo
+- **Checkout** — form data penerima, pilihan metode pembayaran
+- **Riwayat Pesanan** — status pesanan, lacak pengiriman
+- **Wishlist** — simpan produk favorit
+- **Auth** — register, login, JWT token
+- **Ulasan** — tulis ulasan dengan rating bintang
 
-## Requirements
+## Struktur Project
 
-- [Node.js](https://nodejs.org/) v16+
-- [XAMPP](https://www.apachefriends.org/) (MySQL)
-
-## Setup
-
-### 1. Install XAMPP & jalankan MySQL
-
-Buka XAMPP Control Panel → klik **Start** pada MySQL.
-
-### 2. Install semua dependencies
-
-```bash
-npm run install:all
+```
+ShopMin/
+├── server/
+│   ├── index.js              # Express server entry
+│   ├── database.js           # SQLite setup, schema, seed data
+│   ├── middleware/
+│   │   └── auth.js           # JWT auth middleware
+│   └── routes/
+│       ├── auth.js           # Register, login, /me
+│       ├── products.js       # CRUD produk
+│       ├── orders.js         # CRUD pesanan
+│       ├── reviews.js        # CRUD ulasan
+│       ├── promo.js          # Validasi kode promo
+│       └── wishlist.js       # CRUD wishlist
+├── src/
+│   ├── main.tsx
+│   ├── App.tsx               # Router & screen manager
+│   ├── api.ts                # API client (fetch + token)
+│   ├── types.ts              # TypeScript type definitions
+│   ├── context/
+│   │   └── ShopContext.tsx    # Global state & API integration
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── BottomNav.tsx
+│   │   ├── Toast.tsx
+│   │   ├── LoginScreen.tsx
+│   │   ├── KatalogScreen.tsx
+│   │   ├── ProductDetailScreen.tsx
+│   │   ├── CartScreen.tsx
+│   │   ├── CheckoutScreen.tsx
+│   │   ├── OrderSuccessScreen.tsx
+│   │   ├── OrderHistoryScreen.tsx
+│   │   ├── WishlistScreen.tsx
+│   │   ├── ProfileScreen.tsx
+│   │   └── WriteReviewModal.tsx
+│   ├── data/
+│   │   └── mockData.ts       # Data awal (fallback)
+│   └── utils/
+│       └── formatters.ts     # Format IDRGit
+├── .env                      # Environment variables
+├── .gitignore
+└── package.json
 ```
 
-### 3. Setup database
+## Database
+
+**Engine:** SQLite (file-based)
+**File:** `server/shopmin.db` (auto-generated saat pertama kali run)
+
+### Tabel
+
+| Tabel | Keterangan |
+|---|---|
+| `users` | Akun pengguna (nama, email, password hash) |
+| `products` | Katalog produk (12 item seed data) |
+| `orders` | Header pesanan |
+| `order_items` | Item dalam pesanan |
+| `reviews` | Ulasan produk |
+| `promo_codes` | Kode diskon (4 kode seed data) |
+| `wishlist` | Produk favorit user |
+
+### Seed Data
+
+- 12 produk (Elektronik, Fashion, Home, Aksesoris)
+- 4 kode promo: `DISKON20`, `HEMAT50`, `SHOPMIN10`, `FREESHIP`
+- 3 ulasan
+- 1 akun demo: `agil@example.com` / `password123`
+
+## API Endpoints
+
+| Method | Endpoint | Keterangan | Auth |
+|---|---|---|---|
+| GET | `/api/health` | Cek server status | - |
+| GET | `/api/products` | List produk (filter, search, sort) | - |
+| GET | `/api/products/:id` | Detail produk | - |
+| GET | `/api/reviews/:productId` | Ulasan produk | - |
+| POST | `/api/reviews` | Tulis ulasan | - |
+| GET | `/api/promo/:code` | Validasi kode promo | - |
+| POST | `/api/auth/register` | Daftar akun | - |
+| POST | `/api/auth/login` | Login | - |
+| GET | `/api/auth/me` | Data user login | Ya |
+| POST | `/api/orders` | Buat pesanan | - |
+| GET | `/api/orders` | Riwayat pesanan user | Ya |
+| DELETE | `/api/orders/:id` | Hapus pesanan | Ya |
+| DELETE | `/api/orders` | Hapus semua riwayat | Ya |
+| GET | `/api/wishlist` | Ambil wishlist | Ya |
+| POST | `/api/wishlist/:productId` | Tambah ke wishlist | Ya |
+| DELETE | `/api/wishlist/:productId` | Hapus dari wishlist | Ya |
+
+## Cara Menjalankan
+
+### Prerequisites
+
+- Node.js v18+
+- npm
+
+### Install
 
 ```bash
-npm run migrate    # buat database & tabel
-npm run seed       # insert data dummy
+npm install
 ```
 
-### 4. Jalankan aplikasi
+### Development (client + server)
 
 ```bash
 npm run dev
 ```
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+Server: `http://localhost:5000`
+Client: `http://localhost:3000`
 
-### Matikan server
+### Production Build
 
-Tekan `Ctrl+C` di terminal.
-
-## Project Structure
-
-```
-E_Commerce_ShopMin/
-├── package.json              # root scripts (concurrently)
-├── .gitignore
-├── .env.example
-├── ShopMin_PRD_Final.md      # product requirements document
-│
-├── ShopMin/                  # frontend (React + Vite)
-│   ├── src/
-│   │   ├── components/       # 15 komponen UI
-│   │   ├── context/          # state management (Context API)
-│   │   ├── data/             # mock data
-│   │   ├── types.ts          # TypeScript types
-│   │   ├── utils/            # formatters
-│   │   └── App.tsx           # main app
-│   ├── index.html
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vite.config.ts
-│
-└── backend/                  # backend (Express + MySQL)
-    ├── src/
-    │   ├── config/           # database connection
-    │   ├── controllers/      # 7 controllers
-    │   ├── database/         # schema, migrate, seed
-    │   ├── middleware/       # auth, error handler
-    │   └── routes/           # 7 route groups
-    ├── server.js             # entry point
-    ├── .env.example
-    └── package.json
+```bash
+npm run build
+npm run preview
 ```
 
-## API Endpoints
+### Lint / Type Check
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register |
-| POST | `/api/auth/login` | Login |
-| GET | `/api/products` | Get all products |
-| GET | `/api/products/:id` | Get product detail |
-| POST | `/api/cart` | Add to cart |
-| GET | `/api/cart` | Get cart |
-| POST | `/api/orders` | Create order |
-| GET | `/api/orders` | Get orders (login) |
-| POST | `/api/wishlist` | Add to wishlist |
-| POST | `/api/reviews` | Create review |
-| GET | `/api/promos/validate/:code` | Validate promo |
+```bash
+npm run lint
+```
 
-## Database
+## Environment Variables
 
-11 tabel MySQL:
+Buat file `.env` di root project:
 
-`users` · `products` · `product_images` · `product_variants` · `cart_items` · `wishlist` · `orders` · `order_items` · `reviews` · `promo_codes`
+```env
+PORT=5000
+JWT_SECRET=your-secret-key-here
+```
 
-## Data Dummy
+## Kontribusi
 
-- 11 produk (4 kategori)
-- 3 user (password: `password123`)
-- 4 kode promo aktif
-- Sample reviews & orders
+1. Fork project
+2. Buat branch baru (`git checkout -b fitur/nama-fitur`)
+3. Commit perubahan (`git commit -m 'Tambah fitur X'`)
+4. Push ke branch (`git push origin fitur/nama-fitur`)
+5. Buka Pull Request
 
-## License
+## Lisensi
 
 MIT
