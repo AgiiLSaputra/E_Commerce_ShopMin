@@ -40,7 +40,7 @@ export function ProfileScreen() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex-1 max-w-lg mx-auto w-full px-4 py-6 pb-24 md:pb-6"
+      className="flex-1 max-w-4xl mx-auto w-full px-4 py-6 pb-24 md:pb-6"
       >
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 mb-6 text-center">
           <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -126,7 +126,7 @@ export function ProfileScreen() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex-1 max-w-lg mx-auto w-full px-4 py-6 pb-24 md:pb-6"
+      className="flex-1 max-w-4xl mx-auto w-full px-4 py-6 pb-24 md:pb-6"
     >
       {/* Profile Card */}
       <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 mb-6">

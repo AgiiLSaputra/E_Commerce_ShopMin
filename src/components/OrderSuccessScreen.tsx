@@ -17,7 +17,7 @@ export default function OrderSuccessScreen() {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-slate-50"
     >
-      <div className="max-w-lg mx-auto px-4 py-12 space-y-8">
+      <div className="max-w-4xl mx-auto px-4 py-12 space-y-8">
         {/* Confetti Bar */}
         <div className="flex gap-1 justify-center">
           {['#0EA5E9', '#F59E0B', '#10B981', '#8B5CF6', '#EC4899', '#0EA5E9', '#F59E0B'].map(
@@ -150,7 +150,7 @@ export default function OrderSuccessScreen() {
 function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-8">
-      <div className="max-w-lg mx-auto px-4 py-6 text-center text-xs text-slate-400">
+      <div className="max-w-4xl mx-auto px-4 py-6 text-center text-xs text-slate-400">
         &copy; 2026 ShopMin. All rights reserved.
       </div>
     </footer>

@@ -62,48 +62,53 @@ export default function ProductDetailScreen() {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-slate-50"
     >
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-1 text-xs text-slate-400">
-          <button onClick={() => goBack()} className="hover:text-slate-600">
-            Home
-          </button>
-          <ChevronRight className="w-3 h-3" />
-          <button
-            onClick={() => navigateTo('katalog')}
-            className="hover:text-slate-600"
-          >
-            {product.category}
-          </button>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-slate-700 truncate max-w-[120px]">{product.name}</span>
-        </nav>
+      <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
+        {/* Left Column - Images */}
+        <div className="space-y-4 md:space-y-0 md:sticky md:top-20 md:self-start">
+          {/* Breadcrumbs */}
+          <nav className="flex items-center gap-1 text-xs text-slate-400 md:mb-4">
+            <button onClick={() => goBack()} className="hover:text-slate-600">
+              Home
+            </button>
+            <ChevronRight className="w-3 h-3" />
+            <button
+              onClick={() => navigateTo('katalog')}
+              className="hover:text-slate-600"
+            >
+              {product.category}
+            </button>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-slate-700 truncate max-w-[120px]">{product.name}</span>
+          </nav>
 
-        {/* Main Image */}
-        <div className="bg-white rounded-2xl overflow-hidden">
-          <div className="aspect-square bg-slate-100">
-            <img
-              src={images[selectedImage]}
-              alt={product.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex gap-2 p-3 overflow-x-auto">
-            {images.map((img: string, i: number) => (
-              <button
-                key={i}
-                onClick={() => setSelectedImage(i)}
-                className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 ${
-                  selectedImage === i ? 'border-slate-900' : 'border-transparent'
-                }`}
-              >
-                <img src={img} alt="" className="w-full h-full object-cover" />
-              </button>
-            ))}
+          {/* Main Image */}
+          <div className="bg-white rounded-2xl overflow-hidden">
+            <div className="aspect-square bg-slate-100">
+              <img
+                src={images[selectedImage]}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex gap-2 p-3 overflow-x-auto">
+              {images.map((img: string, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedImage(i)}
+                  className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 ${
+                    selectedImage === i ? 'border-slate-900' : 'border-transparent'
+                  }`}
+                >
+                  <img src={img} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Rating */}
+        {/* Right Column - Details */}
+        <div className="space-y-6">
+          {/* Rating */}
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             {[1, 2, 3, 4, 5].map((s) => (
@@ -360,6 +365,7 @@ export default function ProductDetailScreen() {
             </motion.button>
           )}
         </div>
+        </div>
       </div>
 
       <Footer />
@@ -447,7 +453,7 @@ function WriteReviewModal({ product, onClose }: { product: Product; onClose: () 
 function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-8">
-      <div className="max-w-lg mx-auto px-4 py-6 text-center text-xs text-slate-400">
+      <div className="max-w-6xl mx-auto px-4 py-6 text-center text-xs text-slate-400">
         &copy; 2026 ShopMin. All rights reserved.
       </div>
     </footer>

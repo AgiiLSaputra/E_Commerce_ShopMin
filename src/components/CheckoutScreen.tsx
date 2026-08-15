@@ -61,7 +61,9 @@ export default function CheckoutScreen() {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-slate-50 pb-24"
     >
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-6 md:space-y-0 md:grid md:grid-cols-5 md:gap-8">
+        {/* Left Column - Orders */}
+        <div className="md:col-span-3 space-y-6">
         {/* Pesanan Anda */}
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-slate-900">Pesanan Anda</h2>
@@ -143,7 +145,10 @@ export default function CheckoutScreen() {
             </div>
           </div>
         </section>
+        </div>
 
+        {/* Right Column - Payment & Summary */}
+        <div className="md:col-span-2 md:sticky md:top-20 md:self-start space-y-6">
         {/* Metode Pembayaran */}
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-slate-900">Metode Pembayaran</h2>
@@ -213,11 +218,12 @@ export default function CheckoutScreen() {
         {error && (
           <p className="text-sm text-rose-500 text-center">{error}</p>
         )}
+        </div>
       </div>
 
       {/* Sticky Pay Button */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4">
-        <div className="max-w-lg mx-auto">
+        <div className="max-w-4xl mx-auto">
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={handlePay}

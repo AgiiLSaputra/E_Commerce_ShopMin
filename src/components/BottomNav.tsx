@@ -15,7 +15,7 @@ export default function BottomNav() {
   if (['checkout', 'success', 'login'].includes(currentScreen)) return null;
 
   return (
-    <nav className="sticky bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100">
+    <nav className="sticky bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 md:hidden">
       <div className="flex items-stretch">
         {TABS.map(({ label, screen, icon: Icon, badge }) => {
           const isActive = currentScreen === screen || (screen === 'katalog' && currentScreen === 'detail');

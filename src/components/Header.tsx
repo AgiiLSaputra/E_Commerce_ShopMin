@@ -22,7 +22,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
               onClick={() => setIsSidebarOpen(true)}
-              className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors md:hidden"
             >
               <Menu className="w-5 h-5 text-gray-700" />
             </motion.button>

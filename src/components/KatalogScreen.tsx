@@ -54,7 +54,7 @@ export default function KatalogScreen() {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-slate-50"
     >
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-4">
+      <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
         {/* Search */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -152,7 +152,7 @@ export default function KatalogScreen() {
               variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
               initial="hidden"
               animate="show"
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4"
             >
               {visible.map((product) => (
                 <motion.div
@@ -236,7 +236,7 @@ export default function KatalogScreen() {
 function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-8">
-      <div className="max-w-lg mx-auto px-4 py-6 text-center text-xs text-slate-400">
+      <div className="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-slate-400">
         &copy; 2026 ShopMin. All rights reserved.
       </div>
     </footer>

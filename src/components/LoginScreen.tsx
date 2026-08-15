@@ -42,7 +42,7 @@ export default function LoginScreen() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-sm"
+        className="w-full max-w-sm md:max-w-md"
       >
         {/* Logo */}
         <div className="text-center mb-8">

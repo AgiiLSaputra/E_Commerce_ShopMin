@@ -44,7 +44,7 @@ export default function CartScreen() {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-slate-50"
     >
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
         <h1 className="text-3xl font-black text-slate-900">Keranjang Belanja</h1>
 
         {cart.length === 0 ? (
@@ -62,8 +62,9 @@ export default function CartScreen() {
             </motion.button>
           </div>
         ) : (
-          <>
+          <div className="md:grid md:grid-cols-5 md:gap-8">
             {/* Cart Items */}
+            <div className="md:col-span-3">
             <motion.div
               variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
               initial="hidden"
@@ -131,8 +132,10 @@ export default function CartScreen() {
                 </motion.div>
               ))}
             </motion.div>
+            </div>
 
             {/* Order Summary */}
+            <div className="md:col-span-2 md:sticky md:top-20 md:self-start">
             <div className="bg-white rounded-2xl p-5 border border-slate-100 space-y-4">
               <h2 className="font-bold text-slate-900">Ringkasan Pesanan</h2>
 
@@ -202,7 +205,8 @@ export default function CartScreen() {
                 Lanjut ke Checkout
               </motion.button>
             </div>
-          </>
+            </div>
+          </div>
         )}
       </div>
 
@@ -214,7 +218,7 @@ export default function CartScreen() {
 function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-8">
-      <div className="max-w-lg mx-auto px-4 py-6 text-center text-xs text-slate-400">
+      <div className="max-w-4xl mx-auto px-4 py-6 text-center text-xs text-slate-400">
         &copy; 2026 ShopMin. All rights reserved.
       </div>
     </footer>

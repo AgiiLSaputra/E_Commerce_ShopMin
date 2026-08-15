@@ -54,25 +54,28 @@ function MainContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8f9fa]">
-      <Header />
+    <div className="min-h-screen flex bg-[#f8f9fa]">
       <Sidebar />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentScreen}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.2 }}
-          className="flex-1"
-        >
-          {renderScreen()}
-        </motion.div>
-      </AnimatePresence>
+      <div className="flex-1 flex flex-col min-h-screen">
+        <Header />
 
-      <BottomNav />
-      <Toast />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentScreen}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1"
+          >
+            {renderScreen()}
+          </motion.div>
+        </AnimatePresence>
+
+        <BottomNav />
+        <Toast />
+      </div>
     </div>
   );
 }
